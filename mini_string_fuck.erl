@@ -10,14 +10,10 @@ my_first_interpreter(Code) ->
 
 -spec interpret_mini_string_fuck(string(), non_neg_integer(), string()) -> string().
 
-interpret_mini_string_fuck([Command | RemainingCommands], MemoryCell, Accumulator)
-  when Command =:= $+ ->
-
+interpret_mini_string_fuck([$+ | RemainingCommands], MemoryCell, Accumulator) ->
   interpret_mini_string_fuck(RemainingCommands, (MemoryCell + 1) rem 256, Accumulator);
 
-interpret_mini_string_fuck([Command | RemainingCommands], MemoryCell, Accumulator)
-  when Command =:= $. ->
-
+interpret_mini_string_fuck([$. | RemainingCommands], MemoryCell, Accumulator) ->
   interpret_mini_string_fuck(RemainingCommands, MemoryCell, [MemoryCell | Accumulator]);
 
 interpret_mini_string_fuck([_IllegalCommand | RemainingCommands], MemoryCell, Accumulator) ->
