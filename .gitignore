@@ -1,4 +1,4 @@
 *.beam
-*_test.erl
-*_tests.erl
+*_test*
+*_tests*
 test_*
