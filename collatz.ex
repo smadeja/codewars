@@ -1,16 +1,18 @@
 defmodule Collatz do
   @spec collatz(pos_integer()) :: String.t()
   def collatz(n) do
-    collatz_string(n, n |> Integer.to_string())
+    collatz_seq(n) |> Enum.join("->")
   end
 
-  @spec collatz_string(pos_integer(), String.t()) :: String.t()
+  @spec collatz_seq(pos_integer(), String.t()) :: list(pos_integer())
+  defp collatz_seq(n, acc \\ [])
 
-  defp collatz_string(1, acc), do: acc
+  defp collatz_seq(1, acc) do
+    [1 | acc] |> Enum.reverse()
+  end
 
-  defp collatz_string(n, acc) do
-    new_n = collatz_f(n)
-    collatz_string(new_n, acc <> "->#{new_n}")
+  defp collatz_seq(n, acc) do
+    collatz_seq(collatz_f(n), [n | acc])
   end
 
   @spec collatz_f(pos_integer()) :: pos_integer()
